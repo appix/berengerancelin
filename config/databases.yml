@@ -1,0 +1,9 @@
+all:
+  propel:
+    class: sfPropelDatabase
+    param:
+      classname: PropelPDO
+      dsn: 'mysql:host=localhost;dbname=berengerancelin'
+      username: root
+      password: plout
+      encoding: utf8

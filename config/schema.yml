@@ -1,0 +1,10 @@
+propel:
+  page:
+    id:						~
+    name:					{ type: varchar, size: 255, required: true }
+    slug:					{ type: varchar, size: 255, required: true }
+    menu_index:		{ type: integer }
+    content:			{ type: longvarchar }
+    language:			{ type: varchar, size: 2, requried: true }
+    published:		{ type: boolean }
+    homepage:			{ type: boolean }
