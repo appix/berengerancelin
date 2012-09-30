@@ -3,4 +3,5 @@
 	<li><?php echo link_to($menu->getName(), "page/show?slug=" . $menu->getSlug()) ?></li>
     <?php endforeach ?>
     <li><?php echo link_to("Contact", "@contact") ?></li>
+    <li><a href="/backend.php">Connexion</a></li>
 </ul>
