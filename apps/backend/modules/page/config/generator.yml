@@ -4,7 +4,7 @@ generator:
     model_class:           Page
     theme:                 admin15
     non_verbose_templates: true
-    with_show:             false
+    with_show:             true
     singular:              Page
     plural:                Pages
     route_prefix:          page
@@ -12,10 +12,35 @@ generator:
     actions_base_class:    sfActions
 
     config:
-      actions: ~
-      fields:  ~
-      list:    ~
-      filter:  ~
-      form:    ~
-      edit:    ~
-      new:     ~
+      actions:
+        list:								{ credentials: [coach] }
+        edit:								{ credentials: [coach] }
+        new:								{ credentials: [coach] }
+
+      fields:
+        name:								{ label: Titre }
+        slug:								{ label: Slug }
+        menu_index:					{ label: Menu }
+        content:						{ label: Contenue }
+        language:						{ label: Langage }
+        published:					{ label: "Publiée ?" }
+        homepage:						{ label: "Homepage ?" }
+
+
+      list:
+        title:							Liste des pages
+        display:						[ =name, =slug, menu_index, language, published, homepage ]
+        sort:								[ name, asc ]
+        max_per_page:				25
+        batch_actions:			{}
+
+      filter:
+        display:						[ name, slug, language, published, homepage ]
+
+      form:
+
+      edit:
+        title:							"Page : %%name%%"
+
+      new:
+        title:							Nouvelle page

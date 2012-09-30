@@ -1,0 +1,44 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           Profil
+    theme:                 admin15
+    non_verbose_templates: true
+    with_show:             false
+    singular:              Profil
+    plural:                Profils
+    route_prefix:          profil
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions:
+        list:								{ credentials: [coach] }
+        edit:								{ credentials: [coach] }
+        new:								{ credentials: [coach] }
+
+      fields:
+        user_id:						{ label: Compte associé, credentials: [coach] }
+        lastname:						{ label: Nom }
+        firstname:					{ label: Prénom }
+        email:							{ label: eMail }
+        phone:							{ label: Téléphone }
+        birthdate:					{ label: Date de naissance }
+
+      list:
+        title:							Liste des clients
+        display:						[ =lastname, =firstname, email, phone, birthdate ]
+        sort:								[ firstname, asc ]
+        max_per_page:				25
+        batch_actions:			{}
+
+      filter:
+        display:						[ lastname, firstname, email, phone ]
+
+      form:
+
+      edit:
+        title:							%%lastname%% %%firstname%%
+
+      new:
+        title:							Nouveau client

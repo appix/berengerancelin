@@ -11,14 +11,14 @@ class PageActions extends sfActions {
     }
 
     public function executeShow() {
-	$this->slug = $this->getRequestParameter("slug");
-	if ($slug) {
+	$slug = $this->getRequestParameter("slug");
+	if($slug) {
 	    $criteria = new Criteria();
 	    $criteria->add(PagePeer::SLUG, $slug, CRITERIA::EQUAL);
 	    $criteria->add(PagePeer::PUBLISHED, true, CRITERIA::EQUAL);
 	    $criteria->add(PagePeer::LANGUAGE, $this->getUser()->getViewLanguage(), CRITERIA::EQUAL);
 	    $this->page = PagePeer::doSelectOne($criteria);
-	    if ($this->page) {
+	    if($this->page) {
 		return sfView::SUCCESS;
 	    }
 	}
@@ -26,16 +26,31 @@ class PageActions extends sfActions {
     }
 
     public function executeContact() {
-	$this->post = false;
-	if ($this->getRequest()->getMethod() == sfRequest::POST) {
-	    $this->post = true;
-	    $this->lastname = $this->getRequestParameter('lastname');
-	    $this->firstname = $this->getRequestParameter('firstname');
-	    $this->phone = $this->getRequestParameter('phone');
-	    $this->email = $this->getRequestParameter('email');
-	    $this->content = $this->getRequestParameter('content');
-
+	$this->form = new ContactForm();
+	if($this->getRequest()->getMethod() == sfRequest::POST) {
+	    $this->form->bind($this->getRequestParameter('contact'));
+	    if($this->form->isValid()) {
+		$values = $this->form->getValues();
+		$message = $this->getMailer()->compose(
+			array($values['email'] => $values['lastname'] . ' ' . $values['firstname']),
+			sfConfig::get('app_contact_email'),
+			'Nouveau message de ' . $values['lastname'] . ' ' . $values['firstname'],
+			'Nom : ' . $values['lastname'] . "\n" .
+			'Prénom : ' . $values['firstname'] . "\n" .
+			'Adresse : ' . $values['address'] . "\n" .
+			'Email : ' . $values['email'] . "\n" .
+			'Téléphone : ' . $values['phone'] . "\n" .
+			'Message : ' . "\n" .
+			$values['content']
+		);
+		$this->getMailer()->send($message);
+		$this->redirect('@sent');
+	    }
 	}
+    }
+
+    public function executeSent() {
+
     }
 
     public function executeChangeLanguage() {

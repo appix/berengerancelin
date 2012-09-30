@@ -41,4 +41,4 @@ all:
     use_database:           true
 
     # Enable modules
-    enabled_modules:				[ sfGuardAuth ]
+    enabled_modules:				[ sfGuardAuth, sfGuardUser, sfGuardPermission ]

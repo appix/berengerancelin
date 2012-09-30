@@ -1,3 +1,12 @@
+profil:
+  class: sfPropelORMRouteCollection
+  options:
+    model:                Profil
+    module:               profil
+    prefix_path:          /profil
+    column:               id
+    with_wildcard_routes: true
+
 page:
   class: sfPropelORMRouteCollection
   options:
@@ -7,13 +16,9 @@ page:
     column:               id
     with_wildcard_routes: true
 
-# You can find more information about this file on the symfony website:
-# http://www.symfony-project.org/reference/1_4/en/10-Routing
-
-# default rules
 homepage:
   url:   /
-  param: { module: default, action: index }
+  param: { module: profil, action: viewProfil }
 
 sf_guard_signin:
   url:   /login
@@ -22,3 +27,6 @@ sf_guard_signin:
 sf_guard_signout:
   url:   /logout
   param: { module: sfGuardAuth, action: signout }
+
+default:
+  url:		/:module/:action/*

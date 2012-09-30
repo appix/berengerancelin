@@ -8,3 +8,12 @@ propel:
     language:			{ type: varchar, size: 2, requried: true }
     published:		{ type: boolean }
     homepage:			{ type: boolean }
+
+  profil:
+    id:						~
+    user_id:			{ type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    firstname:		{ type: varchar, size: 255 }
+    lastname:			{ type: varchar, size: 255 }
+    email:				{ type: varchar, size: 255 }
+    birthdate:		{ type: date }
+    phone:				{ type: varchar, size: 50 }
