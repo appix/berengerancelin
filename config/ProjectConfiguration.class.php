@@ -8,6 +8,8 @@ class ProjectConfiguration extends sfProjectConfiguration {
     public function setup() {
 	$this->enablePlugins('sfGuardPlugin');
 	$this->enablePlugins('sfPropelORMPlugin');
+
+	$this->setWebDir($this->getRootDir() . DIRECTORY_SEPARATOR . 'www');
     }
 
 }
