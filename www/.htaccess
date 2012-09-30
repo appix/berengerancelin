@@ -1,5 +1,5 @@
 Options +FollowSymLinks +ExecCGI
-
+SetEnv PHP_VER5_3
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
